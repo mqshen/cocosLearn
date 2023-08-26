@@ -87,15 +87,14 @@ bool AppDelegate::applicationDidFinishLaunching()
     stack->setXXTEAKeyAndSign("2dxLua", strlen("2dxLua"), "XXTEA", strlen("XXTEA"));
 
     //register custom function
-    //LuaStack* stack = engine->getLuaStack();
-    //register_custom_function(stack->getLuaState());
+    // luaopen_lua_extensions(stack->getLuaState());
     
 #if CC_64BITS
     FileUtils::getInstance()->addSearchPath("src/64bit");
 #endif
     FileUtils::getInstance()->addSearchPath("src");
     FileUtils::getInstance()->addSearchPath("res");
-    if (engine->executeScriptFile("main.lua"))
+    if (engine->executeScriptFile("game/main/main.lua"))
     {
         return false;
     }

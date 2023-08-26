@@ -1,0 +1,2 @@
+--山寨不同等级对应的图片名称
+valley_image_cfg = {"component_122.png","component_122.png","component_123.png","component_123.png","component_124.png","component_124.png","component_124.png","component_124.png","component_124.png","component_124.png"}

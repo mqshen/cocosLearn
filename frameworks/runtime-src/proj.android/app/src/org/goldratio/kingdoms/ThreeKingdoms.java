@@ -64,16 +64,13 @@ public class ThreeKingdoms extends Cocos2dxActivity {
     }
 
     static {
-        System.out.println("slslsllsls");
-    }
-//    static {
 //        System.loadLibrary("fmodex");
 //        System.loadLibrary("fmodevent");
 //        System.loadLibrary("avutil-54");
 //        System.loadLibrary("avcodec-56");
 //        System.loadLibrary("avformat-56");
 //        System.loadLibrary("cocos2dlua");
-//    }
+    }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ApplicationInfo;
 import android.content.res.AssetManager;
 import android.os.Build;
+import android.os.Environment;
 import android.os.IBinder;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
@@ -17,6 +18,8 @@ import com.android.vending.expansion.zipfile.APKExpansionSupport;
 import com.android.vending.expansion.zipfile.ZipResourceFile;
 import com.enhance.gameservice.IGameTuningService;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -37,6 +40,9 @@ public class Cocos2dxEngine {
     //Enhance API modification begin
     private static IGameTuningService mGameServiceBinder = null;
     private static final int BOOST_TIME = 7;
+
+    // The absolute path to the OBB if it exists, else the absolute path to the APK.
+    private static String sAssetsPath = "";
 
 
     // The OBB file
@@ -153,6 +159,38 @@ public class Cocos2dxEngine {
         return onActivityResultListeners;
     }
 
+    // This function returns the absolute path to the OBB if it exists,
+    // else it returns the absolute path to the APK.
+    public static String getAssetsPath()
+    {
+        if (sAssetsPath.equals("")) {
+
+            String pathToOBB = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/obb/" + sPackageName;
+
+            // Listing all files inside the folder (pathToOBB) where OBB files are expected to be found.
+            String[] fileNames = new File(pathToOBB).list(new FilenameFilter() { // Using filter to pick up only main OBB file name.
+                public boolean accept(File dir, String name) {
+                    return name.startsWith("main.") && name.endsWith(".obb");  // It's possible to filter only by extension here to get path to patch OBB file also.
+                }
+            });
+
+            String fullPathToOBB = "";
+            if (fileNames != null && fileNames.length > 0)  // If there is at least 1 element inside the array with OBB file names, then we may think fileNames[0] will have desired main OBB file name.
+                fullPathToOBB = pathToOBB + "/" + fileNames[0];  // Composing full file name for main OBB file.
+
+            File obbFile = new File(fullPathToOBB);
+            if (obbFile.exists())
+                sAssetsPath = fullPathToOBB;
+            else
+                sAssetsPath = sActivity.getApplicationInfo().sourceDir;
+        }
+
+        return sAssetsPath;
+    }
+
+    public static String getCocos2dxPackageName() {
+        return sPackageName;
+    }
 
     public static String getPackageName() {
         return Cocos2dxEngine.sPackageName;

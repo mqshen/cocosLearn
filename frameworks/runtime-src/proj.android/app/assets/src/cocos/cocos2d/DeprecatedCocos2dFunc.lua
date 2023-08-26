@@ -316,8 +316,8 @@ local function CCSizeMake(width,height)
 end
 _G.CCSizeMake = CCSizeMake
 
-local function ccc4(r,g,b,a)
-    deprecatedTip("ccc4(r,g,b,a)","cc.c4b(r,g,b,a)")
+local function cc.c4b(r,g,b,a)
+    deprecatedTip("cc.c4b(r,g,b,a)","cc.c4b(r,g,b,a)")
     return cc.c4b(r,g,b,a)
 end
 _G.ccc4 = ccc4
@@ -680,7 +680,7 @@ _G.tex2 = tex2
 local CCApplicationDeprecated = { }
 function CCApplicationDeprecated.sharedApplication()
     deprecatedTip("CCApplication:sharedApplication","CCApplication:getInstance")
-    return CCApplication:getInstance()
+    return cc.Application:getInstance()
 end
 CCApplication.sharedApplication = CCApplicationDeprecated.sharedApplication
 --functions of CCApplication will be deprecated end
@@ -700,7 +700,7 @@ CCDirector.sharedDirector = CCDirectorDeprecated.sharedDirector
 local CCUserDefaultDeprecated = { }
 function CCUserDefaultDeprecated.sharedUserDefault()
     deprecatedTip("CCUserDefault:sharedUserDefault","CCUserDefault:getInstance")
-    return CCUserDefault:getInstance()
+    return cc.UserDefault:getInstance()
 end
 CCUserDefault.sharedUserDefault = CCUserDefaultDeprecated.sharedUserDefault
 

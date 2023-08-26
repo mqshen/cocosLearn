@@ -8,7 +8,7 @@ local function deprecatedTip(old_name,new_name)
 end
 
 --functions of WebSocket will be deprecated begin
-local targetPlatform = CCApplication:getInstance():getTargetPlatform()
+local targetPlatform = cc.Application:getInstance():getTargetPlatform()
 if (kTargetIphone == targetPlatform) or (kTargetIpad == targetPlatform) or (kTargetAndroid == targetPlatform) or (kTargetWindows == targetPlatform) then
     local WebSocketDeprecated = { }
     function WebSocketDeprecated.sendTextMsg(self, string)

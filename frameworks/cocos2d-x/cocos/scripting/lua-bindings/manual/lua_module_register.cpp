@@ -21,6 +21,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
+ #include "lua.hpp"
 
 #include "scripting/lua-bindings/manual/lua_module_register.h"
 
@@ -33,7 +34,23 @@
 #include "scripting/lua-bindings/manual/audioengine/lua_cocos2dx_audioengine_manual.h"
 #include "scripting/lua-bindings/manual/physics3d/lua_cocos2dx_physics3d_manual.h"
 #include "scripting/lua-bindings/manual/navmesh/lua_cocos2dx_navmesh_manual.h"
+#include "cjson/lua_cjson.h"
 
+static void lua_register_extensions(lua_State* L)
+{
+
+    static luaL_Reg lua_exts[] = {{"cjson", luaopen_cjson}, {NULL, NULL}};
+
+    lua_getglobal(L, "package");
+    lua_getfield(L, -1, "preload");
+    auto lib = lua_exts;
+    for (; lib->func; ++lib)
+    {
+        lua_pushcfunction(L, lib->func);
+        lua_setfield(L, -2, lib->name);
+    }
+    lua_pop(L, 2);
+}
 
 int lua_module_register(lua_State* L)
 {
@@ -52,6 +69,9 @@ int lua_module_register(lua_State* L)
 #if CC_USE_NAVMESH
     register_navmesh_module(L);
 #endif
+
+    // register extensions: yaiso, lua-cjson
+    lua_register_extensions(L);
     return 1;
 }
 

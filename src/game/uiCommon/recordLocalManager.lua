@@ -1,0 +1,11 @@
+recordLocalInfo = {}
+recordLocalInfo[1] = "fc_tips"
+recordLocalInfo[2] = "show_exercise" 				--是否首次进入演武
+recordLocalInfo[3] = "beat_exercise_army" 			--打败第一支演武部队
+recordLocalInfo[4] = "exercise_difficult_select" 	--第一次进入演武难度选择
+recordLocalInfo[5] = "exercise_free_dialog" 		--第一次进入自由演武对话
+recordLocalInfo[6] = "call_change_tech" 			--招募是否自动转化战法经验
+recordLocalInfo[7] = "call_change_range" 			--转化的索引值
+recordLocalInfo[8] = "share_call_see" 				--已经显示过的共享卡包
+recordLocalInfo[9] = "exercise_front_anim" 			--演武部队配置前锋位置开放动画
+recordLocalInfo[10] = "army_set_front_anim" 		--部队配置前锋位置开放动画
